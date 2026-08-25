@@ -1,24 +1,37 @@
-# 🚀 Day 5: Containerization & Docker Web Server Deployment
+# 🚀 Day 5: Containerization, Web Hosting & System Monitoring
 
 ## 📝 Summary
-The objective for today was to introduce containerization technology using Docker on Server 1. Running services inside isolated containers instead of directly on the host OS is an industry-standard best practice for security, resource efficiency, and scalability.
+Today's focus was on modern infrastructure deployment using containerization. I successfully set up Docker, deployed a live web server (Nginx), and established a centralized monitoring dashboard (Uptime Kuma). I also demonstrated container file system manipulation and real-time troubleshooting, which are essential skills in DevOps and Cybersecurity.
 
 ## ✅ Achievements
-- [x] **Docker Engine Setup:** Downloaded and installed the official Docker engine on Server 1.
-- [x] **Privilege Management:** Configured user permissions by adding the primary user (`ayui`) to the `docker` group, allowing container management without `sudo`.
-- [x] **Container Lifecycle Test:** Successfully executed the `hello-world` test container to verify the container runtime environment.
-- [x] **Nginx Web Server Deployment:** Deployed an official Nginx web server inside a detached container named `web-main`, mapping host port 80 to container port 80.
-- [x] **Verification:** Confirmed public accessibility by browsing the server's static IP and validating the default "Welcome to nginx!" landing page.
+- [x] **Docker Engine Setup:** Installed the official Docker runtime on Server 1 and configured user privileges for seamless command execution without `sudo`.
+- [x] **Nginx Web Server Deployment:** Launched an Nginx container (`ayui-web`) with port mapping (80:80) to serve as the primary web service and future testing target.
+- [x] **UFW Firewall Configuration:** Successfully opened TCP ports 80 (HTTP) and 3001 (Monitoring) to allow inbound traffic while maintaining core system security.
+- [x] **Host-to-Container Manipulation:** Utilized `docker cp` to overwrite the default Nginx `index.html` with a custom HTML/CSS portfolio landing page.
+- [x] **Live Container Troubleshooting:** Successfully used `docker exec` to execute commands inside a running container to remove mistakenly created files and clean up the directory structure.
+- [x] **Active System Monitoring:** Deployed a persistent Uptime Kuma container using Docker Volumes (`uptime-kuma-data`). Configured HTTP tracking for the Web Server and Ping tracking for the Target Node (Server 2).
 
 ## 💻 Key Commands Used
 ```bash
-# Install Docker
+# 1. Install Docker & Configure Permissions
 curl -fsSL [https://get.docker.com](https://get.docker.com) -o get-docker.sh
 sudo sh get-docker.sh
-
-# Add user to docker group & refresh group session
 sudo usermod -aG docker ayui
 newgrp docker
 
-# Run Nginx Web Server Container in background (detached mode)
+# 2. Deploy Nginx Web Server
 docker run -d -p 80:80 --name ayui-web nginx
+
+# 3. Customizing Web Server & Troubleshooting
+# Overwrite default index.html with custom portfolio page
+docker cp index.html ayui-web:/usr/share/nginx/html/index.html
+# Clean up misconfigured files directly inside the running container
+docker exec ayui-web rm /usr/share/nginx/html.index.html
+
+# 4. Deploy Uptime Kuma with Persistent Volume
+docker volume create uptime-kuma-data
+docker run -d --restart=always -p 3001:3001 -v uptime-kuma-data:/app/data --name uptime-kuma louislam/uptime-kuma:1
+
+# 5. Configure Firewall (UFW)
+sudo ufw allow 80/tcp
+sudo ufw allow 3001/tcp
