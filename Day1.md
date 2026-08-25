@@ -12,3 +12,4 @@ The goal for today was to establish the foundational hardware and operating syst
 ---
 **Status:** Completed 🟢
 
+
