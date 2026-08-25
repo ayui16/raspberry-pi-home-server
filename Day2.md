@@ -17,3 +17,4 @@ After encountering Windows Internet Connection Sharing (ICS) issues that caused 
 ```bash
 sudo nmtui
 # Edit a connection -> Wired connection 1 (eth0) -> IPv4 Configuration <Automatic>
+
