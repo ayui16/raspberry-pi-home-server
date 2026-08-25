@@ -22,3 +22,4 @@ sudo chown -R ayui:ayui /mnt/ssd
 
 # Auto-mount (fstab configuration)
 echo 'UUID=a4f2fa78-35d6-4174-8e2a-cb5ca8f6362e /mnt/ssd ext4 defaults,noatime,nofail 0 2' | sudo tee -a /etc/fstab
+
