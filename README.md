@@ -48,32 +48,26 @@ The main objectives of this project are:
 
 ## 🏗️ Current Architecture
 
-```text
-                         INTERNET
-                            │
-                            │
-                         ROUTER
-                            │
-                          Cat6
-                            │
-                            ▼
-                  ┌──────────────────┐
-                  │  Raspberry Pi 4  │
-                  │      4GB         │
-                  │   Main Server    │
-                  └────────┬─────────┘
-                           │
-                         USB 3.0
-                           │
-                           ▼
-                  ┌──────────────────┐
-                  │    480GB SSD     │
-                  │   Server Data    │
-                  └──────────────────┘
+                            INTERNET
+                               │
+                             ROUTER
+                               │
+                             Cat6
+               ┌───────────────┴───────────────┐
+               │                               │
+               ▼                               ▼
+      ┌──────────────────┐            ┌──────────────────┐
+      │  Raspberry Pi 4  │            │  Raspberry Pi 4  │
+      │       4GB        │            │       1GB        │
+      │   Main Server    │            │  Secondary Node  │
+      └────────┬─────────┘            └──────────────────┘
+               │
+            USB 3.0
+               │
+               ▼
+      ┌──────────────────┐
+      │    480GB SSD     │
+      │   Server Data    │
+      └──────────────────┘
 
-
-                  ┌──────────────────┐
-                  │  Raspberry Pi 4  │
-                  │      1GB         │
-                  │ Secondary Node   │
-                  └──────────────────┘
+Based on this information, please generate the full report. Include an "Executive Summary" at the beginning that summarizes the value of this self-hosted home lab, and a "Skills Acquired" section.
